@@ -22,14 +22,13 @@ sh ip eigrp neig
 
 sh ip route neig
 
-
-
-@Edge
+@Edge: EIGRP
 config t
 router eigrp 12
 no auto-summary
 network 10.12.12.0 0.0.0.255
 
+@Edge: OSPF
 router ospf 1
 router-id 12.0.0.1
 network 200.0.0.0 0.0.0.255. area 0
@@ -48,7 +47,7 @@ sh ip eigrp nei
 
 sh ip gi 0/0/0
 
-@Edge
+@Edge: Redistribute
 config t 
 router ospf 1
 redistribute eigrp 12 subnets
