@@ -4,6 +4,8 @@ router eigrp 12
 no auto-summary
 network 10.12.100.0 0.0.0.255
 
+sh ip eigrp neigh
+
 @Corebaba
 config t
 router eigrp 12
@@ -13,6 +15,14 @@ network 10.12.50.0 0.0.0.255
 network 10.12.10.0 0.0.0.255
 network 10.12.1.0 0.0.0.255
 network 10.12.12.0 0.0.0.255
+
+ip eigrp topology
+
+sh ip eigrp neig
+
+sh ip route neig
+
+
 
 @Edge
 config t
@@ -26,12 +36,17 @@ network 200.0.0.0 0.0.0.255. area 0
 network 12.0.0.1 0.0.0.0 area 0
 end
 
+sh ip eigrp neig
+
 sh ip route ospf
 
 sh ip protocol
 
 sh int gi 0/0/0
 
+sh ip eigrp nei
+
+sh ip gi 0/0/0
 
 @Edge
 config t 
@@ -40,3 +55,9 @@ redistribute eigrp 12 subnets
 router eigrp 12
 redistribute ospf 1 Metric 1000000 1 255 1 1500
 end
+
+sh run | section ospf
+
+sh run | section ospf
+
+sh ip route eigrp
