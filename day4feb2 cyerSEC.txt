@@ -36,7 +36,8 @@ ip route 0.0.0.0 0.0.0.0 200.0.0.1
 ip name-server 8.8.8.8
 ip domain-lookup
 
-All the pornsited in the world are owned by 5 companies
+@Edge 
+All the pornsites in the world are owned by 5 companies
 
 config t
 No ip access-list standard NOPORN1
@@ -51,7 +52,8 @@ int gi 0/0/1
 ip access-group NOPORN1 in
 end
 
-TASK2: Use standard access-list to block other countries/classmate:
+@Edge 
+TASK2: Use standard access-list to block other classmates:
 NOCOL1
 config t
 No ip access-list standard NOCOL1
@@ -67,6 +69,7 @@ int gi 0/0/1
 ip access-group NOCOL1 in
 end
 
+@Edge 
 NOCOL1
 config t
 No ip access-list standard NOCOL1
@@ -84,6 +87,33 @@ int gi 0/0/1
 ip access-group NOCOL1 in
 end
 
+@Edge
+To ping & call any1
+config t
+int gi 0/0/1
+no ip access-group NOCOL1 in
+end
+
+Access only .22 & .32
+config t
+No ip access-list standard NOCOL1
+ip access-list standard NOCOL1
+deny 10.21.0.0 0.0.255.255
+deny 10.31.0.0 0.0.255.255
+deny 10.41.0.0 0.0.255.255
+deny 10.42.0.0 0.0.255.255
+deny 10.51.0.0 0.0.255.255
+deny 10.61.0.0 0.0.255.255
+deny 10.52.0.0 0.0.255.255
+deny 10.62.0.0 0.0.255.255
+deny 10.11.0.0 0.0.255.255
+permit any
+int gi 0/0/1
+ip access-group NOCOL1 in
+end
+
+-------------------------------------------------------
+@Edge 
 TASK3: When you become a Security Analyst:
 Learn to Block the IPaddress from 3 "BAD" countries:
 NorthKorea, RUSSIA, China.= where all the Best hackers live.
@@ -91,6 +121,7 @@ runner-up: Nigeria: "love scam!"
 
 :Use standard Access-list[1 to 99] to block IP address from
 all evil countries:
+
 @edge: "version1: permit your friends, block all else!"
 config t
 no access-list 1
@@ -179,13 +210,14 @@ intentionally hackable websites
 8. OWASP Mutillidae II
 9. HackThis!!
 
-task6: How to Make CUCM intentionally hackable to Learn
+TASK6: How to Make CUCM intentionally hackable to Learn
 the Basics for Firewalls.
 before: nmap -v 10.m.100.8
-@Cucm:
+
+@Cucm
 config t
 int fa 0/0
- ip add 10.m.100.9 255.255.255.0 Secondary
+ ip add 10.12.100.9 255.255.255.0 Secondary
 service finger
 service tcp-small-servers
 service udp-small-servers
@@ -193,13 +225,16 @@ ip dns server
 ip http server
 ip http secure-server
 !Make Ping EASY
-ip host pc 10.m.1.10
-ip host cm 10.m.100.8
-ip host cm2 10.m.100.9
-ip host p1 10.m.100.101
-ip host p2 10.m.100.102
-ip host sw 10.m.1.4
-ip host ed 10.m.m.1
+ip host pc 10.12.1.10
+ip host cm 10.12.100.8
+ip host cm2 10.12.100.9
+ip host p1 10.12.100.101
+ip host p2 10.12.100.102
+ip host c6 10.12.50.6
+ip host c8 10.12.50.8
+ip host sw 10.12.1.4
+ip host ed 10.12.12.1
+end
 
 TASK7: Enter the World of BlueTeam: Protect vs Redteam: Attack, 
 BlueTeam: UTM: unified Threat management:
@@ -209,9 +244,18 @@ BlueTeam: UTM: unified Threat management:
 4. IntrusionDetection/IntrusionPrevention
 5  Network Admissions Control.
 Top 5 UTM: 1.FortinetFortigate:
-           1.1: Palo Alto:superSuplado
-           2. Checkpoint
-           3.4 Cisco
+           1. Palo Alto:superSuplado
+           2. Checkpoint NGWF
+           3. Cisco Firepower
+           4. Fortinet
+           5. Juniper srx firewall
+UTM
+
+
+
+
+
+
 
 TASK8: CONGigure YOur first Packet Filter Firewall.
  FORMULA: "  Protocol    hacker   victim  Port "
@@ -235,7 +279,7 @@ TASK8: CONGigure YOur first Packet Filter Firewall.
 ex.1: Make a Firewall so that we can meet this Policy:
 cm is a dns,ssh,callmanager server allow: 53,22,2000
 cm2 is web,and SecureWeb server  allow: 80/443
-create a Policy to meet his condition.
+create a Policy1 to meet his condition.
 @CUCM
 config t
 NO IP access-list Extended fwpolicy1
@@ -254,6 +298,34 @@ ex.2: Make a Firewall so that we can meet this fwpolicy2:
 cm is a ssh,cucm/sccp,web
 cm2 is secureWEB, 23, dns
 create a fwpolicy2 Policy to meet his condition.
+
+config t
+NO IP access-list Extended fwpolicy2
+IP access-list Extended fwpolicy2
+ permit Tcp Any host cm Eq 22
+ permit Tcp Any host cm Eq 443
+ permit Tcp Any host cm Eq 80
+ permit Tcp Any host cm2 Eq 443
+ permit Tcp Any host cm2 Eq 23
+ permit Tcp Any host cm2 Eq 53
+ do sh ip access-list fwpolicy2
+ Int Fa 0/0
+ ip access-group fwpolicy2 IN
+ end
+
+config t
+NO IP access-list Extended fwpolicy3
+IP access-list Extended fwpolicy3
+ permit icmp Any host cm
+ permit Tcp Any host cm Eq 2000
+ permit Tcp Any host cm2 Eq 22
+ permit Tcp Any host cm2 Eq 80
+ permit Tcp Any host cm2 Eq 53
+ permit Tcp Any host cm2 Eq 79
+ do sh ip access-list fwpolicy3
+ Int Fa 0/0
+ ip access-group fwpolicy3 IN
+ end
 
 nmap -v cm       nmap -v cm2
 22               443
