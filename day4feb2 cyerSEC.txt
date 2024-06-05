@@ -34,6 +34,55 @@ Step1: Give unlimited internet to Edge
 config t
 ip route 0.0.0.0 0.0.0.0 200.0.0.1
 ip name-server 8.8.8.8
+ip domain-lookup
+
+All the pornsited in the world are owned by 5 companies
+
+config t
+No ip access-list standard NOPORN1
+ip access-list standard NOPORN1
+deny 66.254.0.0 0.0.255.255
+deny 104.21.0.0 0.0.255.255
+deny 68.235.0.0 0.0.255.255
+deny 104.17.0.0 0.0.255.255
+deny 88.208.0.0 0.0.255.255
+permit any
+int gi 0/0/1
+ip access-group NOPORN1 in
+end
+
+TASK2: Use standard access-list to block other countries/classmate:
+NOCOL1
+config t
+No ip access-list standard NOCOL1
+ip access-list standard NOCOL1
+deny 10.11.0.0 0.0.255.255
+deny 10.21.0.0 0.0.255.255
+deny 10.31.0.0 0.0.255.255
+deny 10.41.0.0 0.0.255.255
+deny 10.51.0.0 0.0.255.255
+deny 10.61.0.0 0.0.255.255
+permit any
+int gi 0/0/1
+ip access-group NOCOL1 in
+end
+
+NOCOL1
+config t
+No ip access-list standard NOCOL1
+ip access-list standard NOCOL1
+deny 10.31.0.0 0.0.255.255
+deny 10.32.0.0 0.0.255.255
+deny 10.41.0.0 0.0.255.255
+deny 10.42.0.0 0.0.255.255
+deny 10.51.0.0 0.0.255.255
+deny 10.61.0.0 0.0.255.255
+deny 10.52.0.0 0.0.255.255
+deny 10.62.0.0 0.0.255.255
+permit any
+int gi 0/0/1
+ip access-group NOCOL1 in
+end
 
 TASK3: When you become a Security Analyst:
 Learn to Block the IPaddress from 3 "BAD" countries:
