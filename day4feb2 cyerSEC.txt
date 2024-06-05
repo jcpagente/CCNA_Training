@@ -25,6 +25,15 @@ WEB SERVER RUNS ON PORT 80, IF YOUR CLASSMATE PORT 80 OPEN? IT IS A WEB SERVER!
 New-Website -name "wtf1" -hostheader "www.ngcp12.ph" -physicalPath "d:\webs\datingbiz"
 
 net  use  s: \\10.k.1.10\c$
+TASK1: 
+Protect your people/IT Staff vs harm Use the power of CISCO Access-list to block all the Pornsites in the world
+from entering your network
+Step1: Give unlimited internet to Edge
+
+@Edge 
+config t
+ip route 0.0.0.0 0.0.0.0 200.0.0.1
+ip name-server 8.8.8.8
 
 TASK3: When you become a Security Analyst:
 Learn to Block the IPaddress from 3 "BAD" countries:
