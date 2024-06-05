@@ -25,3 +25,18 @@ router-id 12.0.0.1
 network 200.0.0.0 0.0.0.255. area 0
 network 12.0.0.1 0.0.0.0 area 0
 end
+
+sh ip route ospf
+
+sh ip protocol
+
+sh int gi 0/0/0
+
+
+@Edge
+config t 
+router ospf 1
+redistribute eigrp 12 subnets
+router eigrp 12
+redistribute ospf 1 Metric 1000000 1 255 1 1500
+end
