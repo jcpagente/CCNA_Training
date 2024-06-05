@@ -19,6 +19,11 @@ net  use  \\10.k.1.10\ipc$  "attacks 139, and connects to it."
 "privilege escalation"
 net  use  s: \\10.k.1.10\c$  /user:administrator
 
+SERVICES VS PORT:
+WEB SERVER RUNS ON PORT 80, IF YOUR CLASSMATE PORT 80 OPEN? IT IS A WEB SERVER! 
+
+New-Website -name "wtf1" -hostheader "www.ngcp12.ph" -physicalPath "d:\webs\datingbiz"
+
 net  use  s: \\10.k.1.10\c$
 
 TASK3: When you become a Security Analyst:
